@@ -19,10 +19,12 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:
+      {{- with .Values.storage.enabled }}
       volumes:
       - name: app-storage
         persistentVolumeClaim:
           claimName: {{ include "laravel.name" . }}
+      {{- end }}
       containers:
         - name: app
           image: {{ .Values.image }}
@@ -31,6 +33,14 @@ spec:
             - sh
             - -c
             - /usr/sbin/php-fpm82 && nginx -g 'daemon off;'
+          livenessProbe:
+            httpGet:
+              path: /up
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /up
+              port: http
           ports:
             - name: http
               containerPort: 80

@@ -5,15 +5,22 @@ storage:
   path: /srv/http/storage/app
 app:
   replicas: 1
-  podLabels:
+  # podLabels:
+  ingress:
+    host: 
+    path: /
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
   autoscaling:
     enabled: false
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
+   #  minReplicas: 1
+   #  maxReplicas: 100
+   #  targetCPUUtilizationPercentage: 80
+   #  targetMemoryUtilizationPercentage: 80
 
 queue:
   enabled: true
   replicas: 1
-  podLabels:
+#  podLabels:

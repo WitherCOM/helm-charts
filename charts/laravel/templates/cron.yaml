@@ -1,0 +1,34 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "laravel.name" . }}-cron
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          {{- with .Values.storage.enabled }}
+          volumes:
+          - name: app-storage
+            persistentVolumeClaim:
+              claimName: {{ include "laravel.name" . }}
+          {{- end }}
+          containers:
+            - name: cron
+              image: {{ .Values.image }}
+              imagePullPolicy: IfNotPresent
+              command:
+              - /usr/bin/php
+              - /srv/http/artisan
+              - schedule:run
+              {{- with .Values.storage.enabled }}
+              volumeMounts:
+                - mountPath: {{ .Values.storage.path }}
+                  name: app_storage
+              {{- end }}
+              envFrom:
+                - secretRef:
+                    name: {{.Values.env-secret}}
+          restartPolicy: Never
