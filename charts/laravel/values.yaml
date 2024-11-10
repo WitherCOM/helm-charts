@@ -1,1 +1,19 @@
-# image: 
+image:
+env-secret:
+storage:
+  enabled: false
+  path: /srv/http/storage/app
+app:
+  replicas: 1
+  podLabels:
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+queue:
+  enabled: true
+  replicas: 1
+  podLabels:

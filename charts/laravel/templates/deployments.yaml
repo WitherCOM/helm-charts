@@ -1,0 +1,81 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "laravel.name" . }}
+spec:
+  {{- if not .Values.app.autoscaling.enabled }}
+  replicas: {{ .Values.app.replicas }}
+  {{- end }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: {{ include "laravel.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "laravel.name" . }}
+      {{- with .Values.app.podLabels }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    spec:
+      volumes:
+      - name: app-storage
+        persistentVolumeClaim:
+          claimName: {{ include "laravel.name" . }}
+      containers:
+        - name: app
+          image: {{ .Values.image }}
+          imagePullPolicy: Always
+          args:
+            - sh
+            - -c
+            - /usr/sbin/php-fpm82 && nginx -g 'daemon off;'
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          {{- with .Values.storage.enabled }}
+          volumeMounts:
+            - mountPath: {{ .Values.storage.path }}
+              name: app_storage
+          {{- end }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.env-secret }}
+{{- if .Values.queue.enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "laravel.name" . }}-queue
+spec:
+  replicas: {{ .Values.queue.replicas }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: {{ include "laravel.name" . }}-queue
+  template:
+    metadata:
+      labels:
+        app: {{ include "laravel.name" . }}-queue
+      {{- with .Values.queue.podLabels }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    spec:
+      containers:
+        - name: queue
+          image: {{ .Values.image }}
+          imagePullPolicy: Always
+          command:
+            - /usr/bin/php
+            - /srv/http/artisan
+            - queue:work
+            - --sleep=3
+            - --tries=3
+            - --max-time=3600
+            - --queue=high,medium,notification,default,low
+          envFrom:
+            - secretRef:
+                name: {{.Values.env-secret}}
+{{- end }}
