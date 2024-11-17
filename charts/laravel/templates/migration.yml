@@ -14,9 +14,6 @@ spec:
           - /usr/bin/php
           - /srv/http/artisan
           - migrate
-          env:
-            - name: APP_ENV
-              value: "migration"
           envFrom:
             - secretRef:
                 name: {{ .Values.env-secret }}
