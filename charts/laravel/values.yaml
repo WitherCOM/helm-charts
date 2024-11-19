@@ -5,6 +5,7 @@ storage:
   path: /srv/http/storage/app
 app:
   replicas: 1
+  upPath: /up
   # podLabels:
   ingress:
     host: 
