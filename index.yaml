@@ -2,6 +2,15 @@ apiVersion: v1
 entries:
   laravel:
   - apiVersion: v2
+    created: "2024-11-19T09:40:43.205470672Z"
+    description: Helm chart bringing alive a laravel project
+    digest: c1f78dade9e440f2f14ae94cb37543c65f8626d71ece35155360005654560d31
+    name: laravel
+    type: application
+    urls:
+    - https://github.com/WitherCOM/helm-charts/releases/download/laravel-0.1.7/laravel-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
     created: "2024-11-19T09:34:35.044359944Z"
     description: Helm chart bringing alive a laravel project
     digest: e1efb06b31532dbf13c3cf0bf3511701d75d1be705ef354e373f3d8902c21673
@@ -55,4 +64,4 @@ entries:
     urls:
     - https://github.com/WitherCOM/helm-charts/releases/download/laravel-0.1.1/laravel-0.1.1.tgz
     version: 0.1.1
-generated: "2024-11-19T09:34:35.044392905Z"
+generated: "2024-11-19T09:40:43.205504765Z"
