@@ -35,11 +35,11 @@ spec:
             - /usr/sbin/php-fpm82 && nginx -g 'daemon off;'
           livenessProbe:
             httpGet:
-              path: {{ .Values.upPath }}
+              path: {{ .Values.app.upPath }}
               port: http
           readinessProbe:
             httpGet:
-              path: {{ .Values.upPath }}
+              path: {{ .Values.app.upPath }}
               port: http
           ports:
             - name: http
