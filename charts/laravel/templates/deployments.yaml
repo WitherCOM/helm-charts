@@ -52,7 +52,7 @@ spec:
           {{- end }}
           envFrom:
             - secretRef:
-                name: {{ .Values.env-secret }}
+                name: {{ .Values.envSecret }}
 {{- if .Values.queue.enabled }}
 ---
 apiVersion: apps/v1
@@ -87,5 +87,5 @@ spec:
             - --queue=high,medium,notification,default,low
           envFrom:
             - secretRef:
-                name: {{.Values.env-secret}}
+                name: {{.Values.envSecret}}
 {{- end }}

@@ -1,5 +1,5 @@
-image:
-env-secret:
+image: 
+envSecret: 
 storage:
   enabled: false
   path: /srv/http/storage/app
