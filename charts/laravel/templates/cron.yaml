@@ -31,4 +31,4 @@ spec:
                 - secretRef:
                     name: {{.Values.envSecret}}
           restartPolicy: Never
-{{- endif }}
+{{- end }}
