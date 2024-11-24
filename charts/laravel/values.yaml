@@ -14,6 +14,7 @@ app:
       cert-manager.io/cluster-issuer: "letsencrypt"
       traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
       traefik.ingress.kubernetes.io/router.tls: "true"
+  command: "web"
   autoscaling:
     enabled: false
    #  minReplicas: 1
@@ -24,4 +25,9 @@ app:
 queue:
   enabled: true
   replicas: 1
+  command: "queue"
 #  podLabels:
+cron:
+  enabled: true
+  command: "schedule"
+

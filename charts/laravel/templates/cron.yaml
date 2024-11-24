@@ -1,3 +1,4 @@
+{{- if .Values.cron.enabled }}
 ---
 apiVersion: batch/v1
 kind: CronJob
@@ -19,10 +20,8 @@ spec:
             - name: cron
               image: {{ .Values.image }}
               imagePullPolicy: IfNotPresent
-              command:
-              - /usr/bin/php
-              - /srv/http/artisan
-              - schedule:run
+              args:
+                - {{ .Values.cron.command }}
               {{- with .Values.storage.enabled }}
               volumeMounts:
                 - mountPath: {{ .Values.storage.path }}
@@ -32,3 +31,4 @@ spec:
                 - secretRef:
                     name: {{.Values.envSecret}}
           restartPolicy: Never
+{{- endif }}

@@ -30,9 +30,7 @@ spec:
           image: {{ .Values.image }}
           imagePullPolicy: Always
           args:
-            - sh
-            - -c
-            - /usr/sbin/php-fpm82 && nginx -g 'daemon off;'
+            - {{ .Values.app.command }}
           livenessProbe:
             httpGet:
               path: {{ .Values.app.upPath }}
@@ -77,14 +75,8 @@ spec:
         - name: queue
           image: {{ .Values.image }}
           imagePullPolicy: Always
-          command:
-            - /usr/bin/php
-            - /srv/http/artisan
-            - queue:work
-            - --sleep=3
-            - --tries=3
-            - --max-time=3600
-            - --queue=high,medium,notification,default,low
+          args:
+            - {{ .Values.queue.command }}
           envFrom:
             - secretRef:
                 name: {{.Values.envSecret}}
