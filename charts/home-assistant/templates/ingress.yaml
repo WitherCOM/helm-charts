@@ -17,7 +17,7 @@ spec:
               name: {{ include "home-assistant.name" . }}
               port:
                 name: http
-          path: {{ .Values.app.ingress.path }}
+          path: /
           pathType: Prefix
   tls:
     - hosts:
