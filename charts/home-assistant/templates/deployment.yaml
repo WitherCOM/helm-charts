@@ -27,6 +27,10 @@ spec:
         - name: wireguard-setup
           image: ghcr.io/withercom/wg-easy:1.1.0
           imagePullPolicy: IfNotExists
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
           envFrom:
             - secretRef:
                 name: {{ .Values.envSecret }}
