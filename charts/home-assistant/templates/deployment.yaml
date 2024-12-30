@@ -54,4 +54,5 @@ spec:
             - mountPath: /config
               name: config
           env:
-            TZ: Europe/Budapest
+            - name: TZ
+              value: Europe/Budapest
