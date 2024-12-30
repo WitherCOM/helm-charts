@@ -26,7 +26,7 @@ spec:
       initContainers:
         - name: wireguard-setup
           image: ghcr.io/withercom/wg-easy:1.1.0
-          imagePullPolicy: IfNotExists
+          imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
               add:
@@ -37,7 +37,7 @@ spec:
       containers:
         - name: ha
           image: ghcr.io/home-assistant/home-assistant:stable
-          imagePullPolicy: IfNotExists
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
               path: /
