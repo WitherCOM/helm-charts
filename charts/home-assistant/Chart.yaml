@@ -2,4 +2,4 @@ apiVersion: v2
 name: home-assistant
 description: Helm chart for home assistant with wireguard enhanced
 type: application
-version: 0.1.4
+version: 0.1.5
