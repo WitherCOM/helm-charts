@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "home-assistant.name" . }}
+spec:
+  {{- if not .Values.app.autoscaling.enabled }}
+  replicas: {{ .Values.app.replicas }}
+  {{- end }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: {{ include "home-assistant.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "home-assistant.name" . }}
+      {{- with .Values.app.podLabels }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    spec:
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: {{ include "home-assistant.name" . }}
+      initContainers:
+        - name: wireguard-setup
+          image: ghcr.io/withercom/wg-easy:1.1.0
+          imagePullPolicy: IfNotExists
+          envFrom:
+            - secretRef:
+                name: {{ .Values.envSecret }}
+      containers:
+        - name: ha
+          image: ghcr.io/home-assistant/home-assistant:stable
+          imagePullPolicy: IfNotExists
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          ports:
+            - name: http
+              containerPort: 8123
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+          env:
+            TZ: Europe/Budapest

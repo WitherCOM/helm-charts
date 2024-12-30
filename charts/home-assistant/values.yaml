@@ -1,0 +1,16 @@
+envSecret:
+app:
+  replicas: 1
+  # podLabels:
+  ingress:
+    host: 
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+  autoscaling:
+    enabled: false
+   #  minReplicas: 1
+   #  maxReplicas: 100
+   #  targetCPUUtilizationPercentage: 80
+   #  targetMemoryUtilizationPercentage: 80
