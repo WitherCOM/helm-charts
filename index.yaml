@@ -1,5 +1,15 @@
 apiVersion: v1
 entries:
+  home-assistant:
+  - apiVersion: v2
+    created: "2024-12-30T18:52:16.607418706Z"
+    description: Helm chart for home assistant with wireguard enhanced
+    digest: 97271bb5701591f4a65a7d0e396a80ef62592f8ea44d283def0532fa9cbdbf32
+    name: home-assistant
+    type: application
+    urls:
+    - https://github.com/WitherCOM/helm-charts/releases/download/home-assistant-0.1.1/home-assistant-0.1.1.tgz
+    version: 0.1.1
   laravel:
   - apiVersion: v2
     created: "2024-11-24T12:21:02.403481679Z"
@@ -100,4 +110,4 @@ entries:
     urls:
     - https://github.com/WitherCOM/helm-charts/releases/download/laravel-0.1.1/laravel-0.1.1.tgz
     version: 0.1.1
-generated: "2024-11-24T12:21:02.403525911Z"
+generated: "2024-12-30T18:52:16.607449734Z"
