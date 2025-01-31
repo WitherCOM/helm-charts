@@ -43,6 +43,10 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
+          {{- with .Values.app.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- with .Values.storage.enabled }}
           volumeMounts:
             - mountPath: {{ .Values.storage.path }}
