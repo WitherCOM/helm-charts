@@ -11,7 +11,7 @@ spec:
           image: {{ .Values.image }}
           imagePullPolicy: IfNotPresent
           command:
-          - /usr/bin/php
+          - php
           - /srv/http/artisan
           - migrate
           env:
