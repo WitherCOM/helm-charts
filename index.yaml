@@ -1,5 +1,15 @@
 apiVersion: v1
 entries:
+  bitwarden:
+  - apiVersion: v2
+    created: "2025-01-31T10:40:03.402297197Z"
+    description: Helm chart for docker like bitwarden self-host
+    digest: 063d323137d1706feb121052df3deb3aafb13fa625b0869a39a7aa1e59f98dcb
+    name: bitwarden
+    type: application
+    urls:
+    - https://github.com/WitherCOM/helm-charts/releases/download/bitwarden-0.2.1/bitwarden-0.2.1.tgz
+    version: 0.2.1
   home-assistant:
   - apiVersion: v2
     created: "2024-12-30T21:14:55.778640982Z"
@@ -47,6 +57,15 @@ entries:
     - https://github.com/WitherCOM/helm-charts/releases/download/home-assistant-0.1.1/home-assistant-0.1.1.tgz
     version: 0.1.1
   laravel:
+  - apiVersion: v2
+    created: "2025-01-31T10:40:03.502020288Z"
+    description: Helm chart bringing alive a laravel project
+    digest: 1febf029736202d48c53c1850b997b3c6940a1bad36735b07feaab8f7eb7de3d
+    name: laravel
+    type: application
+    urls:
+    - https://github.com/WitherCOM/helm-charts/releases/download/laravel-0.2.2/laravel-0.2.2.tgz
+    version: 0.2.2
   - apiVersion: v2
     created: "2024-11-24T12:21:02.403481679Z"
     description: Helm chart bringing alive a laravel project
@@ -146,4 +165,4 @@ entries:
     urls:
     - https://github.com/WitherCOM/helm-charts/releases/download/laravel-0.1.1/laravel-0.1.1.tgz
     version: 0.1.1
-generated: "2024-12-30T21:14:55.778680496Z"
+generated: "2025-01-31T10:40:03.502079409Z"
