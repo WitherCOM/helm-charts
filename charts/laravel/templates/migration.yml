@@ -12,7 +12,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command:
           - php
-          - /srv/http/artisan
+          - /app/artisan
           - migrate
           env:
             - name: APP_ENV

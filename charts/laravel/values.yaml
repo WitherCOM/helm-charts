@@ -2,10 +2,11 @@ image:
 envSecret: 
 storage:
   enabled: false
-  path: /srv/http/storage/app
+  path: /app/storage/app
 app:
   replicas: 1
   upPath: /up
+  #extraPorts:
   # podLabels:
   ingress:
     host: 
